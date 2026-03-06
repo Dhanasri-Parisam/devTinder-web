@@ -1,9 +1,33 @@
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
+import { addFeed } from "../utils/feedSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import UserCard from "./UserCard";
+
 const Feed = () => {
+
+  const feed = useSelector((store) => store.feed);
+  const dispatch = useDispatch();
+
+  const fetchFeed = async () => {
+    if(feed) return;
+    try{
+      const res = await axios.get(BASE_URL + "/getAllData", { withCredentials: true });
+      dispatch(addFeed(res.data));
+    } catch (error) {
+      console.error("Error fetching feed:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFeed();
+  }, []);
+
   return (
-    <div className="feed">
-        <h1 className="text-2xl font-bold">Feed Page</h1>
-        <p className="mt-4">This is the feed page where you can see all the posts.</p>
-    </div>
+    feed && (<div className = "flex justify-center items-center h-full my-14">
+      <UserCard user = {feed[0]} />
+    </div> )
   )
 }
 

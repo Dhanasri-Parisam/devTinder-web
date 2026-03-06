@@ -28,3 +28,13 @@
 - create a services folder and move all the API calls into it. 
 This will help in organizing the code better and making it more maintainable.
 
+- you should not be access other routes without login
+- if token is not present in the cookies then it should redirect to the login page
+- logout
+- profile page
+- get the feed and and the feed in the store
+- build the user card feed
+
+- Edit profile page
+- create a form to edit the user's profile information, including name, bio, skills, and profile picture. Use the useState hook to manage the form state and handle input changes. When the form is submitted, send a PUT request to the backend API to update the user's profile information. Handle the response from the API and display appropriate messages based on the success or failure of the update attempt.
+- show a toast message when the profile is updated successfully and hide it after 3 seconds.
